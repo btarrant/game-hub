@@ -71,7 +71,7 @@ Run the application locally:
 npm run dev
 ```
 
-Open your browser and visit [http://localhost:3000](http://localhost:3000) to see Game Hub in action.
+Open your browser and visit [http://localhost:5173](http://localhost:5173) to see Game Hub in action.
 
 ## Folder Structure
 
