@@ -1,12 +1,9 @@
 import { HStack, Image, List, ListItem } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
+import getCroppedImageURL from "../services/image-url";
 
 const GenreList = () => {
   const { data } = useGenres();
-
-  function getCroppedImageUrl(image_background: string): string | undefined {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <List>
@@ -16,7 +13,7 @@ const GenreList = () => {
             <Image
               boxSize="32px"
               borderRadius={8}
-              src={getCroppedImageUrl(genre.image_background)}
+              src={getCroppedImageURL(genre.image_background)}
             />
           </HStack>
         </ListItem>
