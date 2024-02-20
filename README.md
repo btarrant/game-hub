@@ -78,7 +78,6 @@ Open your browser and visit [http://localhost:5173](http://localhost:5173) to se
 The project follows a standard React project structure. Key folders include:
 
 - `src`: Contains the source code of the application.
-- `public`: Houses the public assets and the `index.html` file.
 
 ## Dependencies
 
