@@ -2,6 +2,8 @@
 
 Welcome to Game Hub, a React application built with TypeScript and Vite. This app serves as a hub for video game enthusiasts, providing information about various games using the Rawg.io video game API and leveraging the Chakra UI library for a clean and responsive user interface.
 
+Click here to view deployed app: [https://bt-game-hub.vercel.app](https://bt-game-hub.vercel.app)
+
 ## Table of Contents
 
 - [Features](#features)
