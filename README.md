@@ -20,7 +20,6 @@ Click here to view deployed app: [https://bt-game-hub.vercel.app](https://bt-gam
 ## Features
 
 - **Game Search:** Search and explore a vast collection of video games.
-- **Game Details:** View detailed information about a specific game, including description, release date, and platforms.
 - **Responsive Design:** Utilize the Chakra UI library for a responsive and visually appealing user interface.
 - **TypeScript Support:** Leverage the benefits of TypeScript for enhanced code quality and development experience.
 - **Fast Development:** Utilize Vite for fast development and optimized build times.
