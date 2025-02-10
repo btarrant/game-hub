@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-import { AxiosRequestConfig, CanceledError } from "axios";
+import { AxiosRequestConfig, AxiosError, CanceledError } from "axios";
 
 interface FetchResponse<T> {
   count: number;
   results: T[];
+}
+
+interface APIErrorResponse {
+  message?: string;
 }
 
 const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?: any[]) => {
@@ -20,15 +24,20 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
       apiClient
         .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
         .then((res) => {
-        setData(res.data.results);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+          setData(res.data.results);
+        })
+        .catch((err: AxiosError<APIErrorResponse>) => {
+          if (err instanceof CanceledError) return;
+          
+          if (err.response?.data?.message) {
+            setError(err.response.data.message);
+          } else {
+            setError(err.message || "An error occurred");
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
 
       return () => controller.abort();
     },
