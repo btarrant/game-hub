@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-import axios, { AxiosError, isCancel } from "axios";
+import { AxiosError } from "axios"
 import type { AxiosRequestConfig } from "axios";
 
 
@@ -20,6 +20,8 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
 
   useEffect(() => {
     const controller = new AbortController();
+    let isMounted = true;
+
     setLoading(true);
 
     apiClient
@@ -28,7 +30,7 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
         setData(res.data.results);
       })
       .catch((err: AxiosError<APIErrorResponse>) => {
-        if (axios.isCancel(err)) return;
+        if (err.name === "CanceledError") return;
 
         if (isMounted) {
           setError(err.response?.data?.message || err.message || "An error occurred");
@@ -38,10 +40,12 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
         setLoading(false);
       });
 
-    return () => controller.abort();
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, [endpoint, requestConfig, ...(deps || [])]);
 
-  // ✅ Add a return statement to ensure the hook provides the expected object
   return { data, error, isLoading };
 };
 
