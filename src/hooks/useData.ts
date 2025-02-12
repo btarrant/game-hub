@@ -16,34 +16,32 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(
-    () => {
-      const controller = new AbortController();
-      setLoading(true);
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoading(true);
 
-      apiClient
-        .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
-        .then((res) => {
-          setData(res.data.results);
-        })
-        .catch((err: AxiosError<APIErrorResponse>) => {
-          if (err instanceof CanceledError) return;
-          
-          if (err.response?.data?.message) {
-            setError(err.response.data.message);
-          } else {
-            setError(err.message || "An error occurred");
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    apiClient
+      .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
+      .then((res) => {
+        setData(res.data.results);
+      })
+      .catch((err: AxiosError<APIErrorResponse>) => {
+        if (err instanceof CanceledError) return;
 
-      return () => controller.abort();
-    },
-    deps ? [...deps] : []
-  );
+        if (err.response?.data?.message) {
+          setError(err.response.data.message);
+        } else {
+          setError(err.message || "An error occurred");
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
 
+    return () => controller.abort();
+  }, [endpoint, requestConfig, ...(deps || [])]);
+
+  // ✅ Add a return statement to ensure the hook provides the expected object
   return { data, error, isLoading };
 };
 
