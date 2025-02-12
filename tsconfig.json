@@ -9,6 +9,7 @@
     /* Bundler mode */
     "moduleResolution": "node",
     "isolatedModules": true,
+    "types": ["jest", "node"],
     "noEmit": true,
     "jsx": "react-jsx",
 
