@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.2",
+    "@chakra-ui/system": "^2.6.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@types/axios": "^0.9.36",
@@ -18,12 +18,13 @@
     "framer-motion": "^11.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.0.1"
+    "react-icons": "^5.4.0"
   },
   "devDependencies": {
+    "@chakra-ui/react": "^3.8.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.1",
-    "@types/react": "^18.2.55",
+    "@types/react": "^18.3.18",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",

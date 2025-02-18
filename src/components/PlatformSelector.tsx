@@ -1,5 +1,11 @@
 import React from "react";
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  MenuRoot,
+  MenuTrigger,
+  MenuContent,
+  MenuItem,
+} from "./ui/menu";
+import { Button } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms from "../hooks/usePlatforms";
 import { Platform } from "../hooks/useGames";
@@ -15,21 +21,26 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
   if (error) return null;
 
   return (
-    <Menu>
-      {/* ✅ Added `data-testid="platform-filter"` to the outer wrapper */}
-      <div data-testid="platform-filter">
-        <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+    <MenuRoot onSelect={(details: { value: string }) => {
+      const selected = data.find(platform => platform.name === details.value);
+      if (selected) {
+        onSelectPlatform(selected);
+      }
+    }}>
+      <MenuTrigger asChild>
+        <Button>
           {selectedPlatform?.name || "Platforms"}
-        </MenuButton>
-        <MenuList>
-          {data.map((platform) => (
-            <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id}>
-              {platform.name}
-            </MenuItem>
-          ))}
-        </MenuList>
-      </div>
-    </Menu>
+          <BsChevronDown style={{ marginLeft: "8px" }} />
+        </Button>
+      </MenuTrigger>
+      <MenuContent>
+        {data.map((platform) => (
+          <MenuItem key={platform.id} value={platform.name}>
+            {platform.name}
+          </MenuItem>
+        ))}
+      </MenuContent>
+    </MenuRoot>
   );
 };
 

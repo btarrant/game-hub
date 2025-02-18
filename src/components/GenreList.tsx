@@ -20,9 +20,9 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
         Genres
       </Heading>
       {/* ✅ Added `data-testid="genre-filter"` here */}
-      <List data-testid="genre-filter">
+      <List.Root data-testid="genre-filter">
         {data.map((genre) => (
-          <ListItem key={genre.id} paddingY="5px">
+          <List.Item key={genre.id} paddingY="5px">
             <HStack>
               <Image
                 boxSize="32px"
@@ -36,15 +36,15 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                 onClick={() => onSelectGenre(genre)}
                 fontSize="lg"
-                variant="link"
+                variant="ghost"
                 className={genre.id === selectedGenre?.id ? "active" : ""}
               >
                 {genre.name}
               </Button>
             </HStack>
-          </ListItem>
+          </List.Item>
         ))}
-      </List>
+      </List.Root>
     </>
   );
 };

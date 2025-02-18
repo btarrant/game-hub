@@ -6,6 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "module": "ESNext",
     "skipLibCheck": true,
+    "esModuleInterop": true,
 
     /* Bundler mode */
     "moduleResolution": "node",
