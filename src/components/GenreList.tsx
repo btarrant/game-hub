@@ -20,9 +20,9 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
         Genres
       </Heading>
       {/* ✅ Added `data-testid="genre-filter"` here */}
-      <List.Root data-testid="genre-filter">
+      <List data-testid="genre-filter">
         {data.map((genre) => (
-          <List.Item key={genre.id} paddingY="5px">
+          <ListItem key={genre.id} paddingY="5px">
             <HStack>
               <Image
                 boxSize="32px"
@@ -42,9 +42,9 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 {genre.name}
               </Button>
             </HStack>
-          </List.Item>
+          </ListItem>
         ))}
-      </List.Root>
+      </List>
     </>
   );
 };

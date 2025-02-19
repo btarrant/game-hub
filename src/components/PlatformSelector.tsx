@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  MenuRoot,
-  MenuTrigger,
-  MenuContent,
+  Menu,
+  MenuButton,
+  MenuList,
   MenuItem,
-} from "./ui/menu";
-import { Button } from "@chakra-ui/react";
+  Button,
+} from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms from "../hooks/usePlatforms";
 import { Platform } from "../hooks/useGames";
@@ -21,26 +21,18 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
   if (error) return null;
 
   return (
-    <MenuRoot onSelect={(details: { value: string }) => {
-      const selected = data.find(platform => platform.name === details.value);
-      if (selected) {
-        onSelectPlatform(selected);
-      }
-    }}>
-      <MenuTrigger asChild>
-        <Button>
-          {selectedPlatform?.name || "Platforms"}
-          <BsChevronDown style={{ marginLeft: "8px" }} />
-        </Button>
-      </MenuTrigger>
-      <MenuContent>
+    <Menu>
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+        {selectedPlatform?.name || "Platforms"}
+      </MenuButton>
+      <MenuList>
         {data.map((platform) => (
-          <MenuItem key={platform.id} value={platform.name}>
+          <MenuItem key={platform.id} onClick={() => onSelectPlatform(platform)}>
             {platform.name}
           </MenuItem>
         ))}
-      </MenuContent>
-    </MenuRoot>
+      </MenuList>
+    </Menu>
   );
 };
 
